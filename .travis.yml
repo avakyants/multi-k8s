@@ -1,0 +1,23 @@
+sudo: required
+services:
+    - docker
+    
+before_install:
+    - docker build -t tema14/react-test -f ./client/Dockerfile.dev ./client
+    
+script:
+    - docker run tema14/react-test npm test -- --coverge
+    
+after_success:
+    - docker build -t tema14/multi-client ./client
+    - docker build -t tema14/multi-nginx ./nginx
+    - docker build -t tema14/multi-server ./server
+    - docker build -t tema14/multi-worker ./worker
+    # login to the docker CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    # take those images and push them to docker hub
+    - docker push tema14/multi-client
+    - docker push tema14/multi-nginx
+    - docker push tema14/multi-server
+    - docker push tema14/multi-worker
+    
