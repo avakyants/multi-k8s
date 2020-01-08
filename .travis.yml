@@ -6,7 +6,7 @@ before_install:
     - docker build -t tema14/react-test -f ./client/Dockerfile.dev ./client
     
 script:
-    - docker run tema14/react-test npm test -- --coverge
+    - docker run -e CI=true tema14/react-test npm test
     
 after_success:
     - docker build -t tema14/multi-client ./client
