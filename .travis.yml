@@ -14,8 +14,7 @@ after_success:
     - docker build -t tema14/multi-server ./server
     - docker build -t tema14/multi-worker ./worker
     # login to the docker CLI
-    #- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    - docker login -u="$DOCKER_ID" -p="$DOCKER_PASSWORD"
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     # take those images and push them to docker hub
     - docker push tema14/multi-client
     - docker push tema14/multi-nginx
