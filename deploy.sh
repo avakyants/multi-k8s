@@ -10,4 +10,4 @@ docker push tema14/multi-worker:$SHA
 kubectl apply -f k8s
 kubectl set image deployments/server-deployment server=tema14/multi-server:$SHA
 kubectl set image deployments/client-deployment client=tema14/multi-client:$SHA
-kubectl set image deployments/worker-deployment client=tema14/multi-worker:$SHA
+kubectl set image deployments/worker-deployment worker=tema14/multi-worker:$SHA
